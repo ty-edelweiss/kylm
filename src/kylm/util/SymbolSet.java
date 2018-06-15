@@ -187,10 +187,10 @@ public class SymbolSet implements Serializable {
 		SymbolSet ret = new SymbolSet();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String s = null;
-		while(null != (s = br.readLine())) {
-			StringTokenizer st = new StringTokenizer(s, " \t");
-			int sym = ret.addSymbol(st.nextToken());
-			if(st.hasMoreTokens() && sym != Integer.parseInt(st.nextToken()))
+		while((s = br.readLine()) != null) {
+			String[] st = s.split(" \t");
+			int sym = ret.addSymbol(st[0]);
+			if(st.length > 1 && sym != Integer.parseInt(st[1]))
 				throw new IOException("Illegal line in Symbol File: "+s);
 		}
 		return ret;
